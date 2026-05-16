@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | BRSI – VIT Chapter</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      color: var(--card-text-color);
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: var(--border-radius);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px; right: 20px;
+      background: none; border: none;
+      color: var(--card-text-color);
+      font-size: 2rem; cursor: pointer;
+      z-index: 10;
+    }
+    .modal-header-img {
+      width: 100%; height: 300px; object-fit: cover;
+    }
+    .modal-body { padding: 30px; }
+    .modal-date { color: var(--accent-color); font-weight: 600; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main class="container">
+    <section class="section">
+      <h1 class="section-title reveal">Upcoming Events</h1>
+      <div id="upcoming-events-grid" class="grid-2">
+        <div class="loader"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title reveal">Past Events</h2>
+      <div id="past-events-grid" class="grid-3">
+        <div class="loader"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Event Modal -->
+  <div class="modal-overlay" id="event-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <img src="" alt="" class="modal-header-img" id="modal-img">
+      <div class="modal-body">
+        <h2 id="modal-title" style="color: var(--brand-color); margin-bottom: 10px;"></h2>
+        <div class="modal-date" id="modal-date"></div>
+        <p id="modal-desc" style="white-space: pre-line;"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-container"></div>
+
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/events.js"></script>
+</body>
+</html>

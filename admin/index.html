@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | BRSI VIT</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div class="admin-login-wrapper" id="login-screen">
+    <div class="admin-login-card">
+      <h2 style="color: var(--brand-color); margin-bottom: 20px;">BRSI Admin</h2>
+      <div class="form-group">
+        <input type="password" id="admin-pwd" placeholder="Enter Password">
+      </div>
+      <button class="btn-primary" id="btn-login" style="width: 100%;">Login</button>
+      <p id="login-error" style="color: #e74c3c; margin-top: 15px; display: none;">Invalid Password</p>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="admin-dashboard" id="dashboard-screen">
+    <div class="admin-nav">
+      <h1>BRSI Admin Dashboard</h1>
+      <button class="btn-primary btn-small" id="btn-logout">Logout</button>
+    </div>
+    
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-target="tab-events">Events</button>
+      <button class="tab-btn" data-target="tab-biobuzz">Biobuzz</button>
+      <button class="tab-btn" data-target="tab-board">Board</button>
+      <button class="tab-btn" data-target="tab-teams">Teams</button>
+      <button class="tab-btn" data-target="tab-settings">Settings</button>
+    </div>
+
+    <!-- Events Tab -->
+    <div class="tab-content active" id="tab-events">
+      <h2>Manage Events</h2>
+      <div class="card" style="padding: 20px; margin-top: 20px;">
+        <form id="form-events">
+          <input type="hidden" id="ev-id">
+          <div class="grid-2">
+            <div class="form-group"><label>Name</label><input type="text" id="ev-name" required></div>
+            <div class="form-group"><label>Date</label><input type="date" id="ev-date" required></div>
+          </div>
+          <div class="form-group"><label>Description</label><textarea id="ev-desc"></textarea></div>
+          <div class="form-group">
+            <label>Image Upload</label><input type="file" id="ev-img" accept="image/*">
+            <small id="ev-current-img"></small>
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox" id="ev-upcoming" checked> Is Upcoming Event?</label>
+          </div>
+          <button type="submit" class="btn-primary">Save Event</button>
+          <button type="button" class="btn-primary" style="background:#555;" onclick="document.getElementById('form-events').reset(); document.getElementById('ev-id').value='';">Clear</button>
+        </form>
+      </div>
+      <table id="table-events">
+        <thead><tr><th>Name</th><th>Date</th><th>Upcoming</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Biobuzz Tab -->
+    <div class="tab-content" id="tab-biobuzz">
+      <h2>Manage Biobuzz</h2>
+      <div class="card" style="padding: 20px; margin-top: 20px;">
+        <form id="form-biobuzz">
+          <input type="hidden" id="bb-id">
+          <div class="grid-2">
+            <div class="form-group"><label>Edition Name</label><input type="text" id="bb-name" required></div>
+            <div class="form-group"><label>Release Date</label><input type="date" id="bb-date" required></div>
+          </div>
+          <div class="form-group"><label>Description</label><textarea id="bb-desc"></textarea></div>
+          <div class="form-group"><label>Read/Download Link (URL)</label><input type="text" id="bb-link"></div>
+          <div class="form-group">
+            <label>Cover Image</label><input type="file" id="bb-img" accept="image/*">
+          </div>
+          <button type="submit" class="btn-primary">Save Issue</button>
+        </form>
+      </div>
+      <table id="table-biobuzz">
+        <thead><tr><th>Edition Name</th><th>Release Date</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Board Tab -->
+    <div class="tab-content" id="tab-board">
+      <h2>Manage Board Members</h2>
+      <div class="card" style="padding: 20px; margin-top: 20px;">
+        <form id="form-board">
+          <input type="hidden" id="bm-id">
+          <div class="grid-2">
+            <div class="form-group"><label>Year (e.g. 2024-2025)</label><input type="text" id="bm-year" required></div>
+            <div class="form-group"><label>Name</label><input type="text" id="bm-name" required></div>
+          </div>
+          <div class="grid-2">
+            <div class="form-group"><label>Position</label><input type="text" id="bm-pos" required></div>
+            <div class="form-group"><label>Order (Lower = Top)</label><input type="number" id="bm-order" value="0"></div>
+          </div>
+          <div class="form-group">
+            <label>Photo</label><input type="file" id="bm-img" accept="image/*">
+          </div>
+          <button type="submit" class="btn-primary">Save Member</button>
+        </form>
+      </div>
+      <table id="table-board">
+        <thead><tr><th>Year</th><th>Name</th><th>Position</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Teams Tab -->
+    <div class="tab-content" id="tab-teams">
+      <h2>Manage Team Events</h2>
+      <div class="card" style="padding: 20px; margin-top: 20px;">
+        <form id="form-teams">
+          <input type="hidden" id="te-id">
+          <div class="grid-2">
+            <div class="form-group"><label>Event Name</label><input type="text" id="te-name" required></div>
+            <div class="form-group"><label>Date</label><input type="date" id="te-date" required></div>
+          </div>
+          <div class="form-group"><label>Result/Achievement</label><input type="text" id="te-result"></div>
+          <div class="form-group"><label>Description</label><textarea id="te-desc"></textarea></div>
+          <div class="form-group">
+            <label>Image</label><input type="file" id="te-img" accept="image/*">
+          </div>
+          <button type="submit" class="btn-primary">Save Team Event</button>
+        </form>
+      </div>
+      <table id="table-teams">
+        <thead><tr><th>Name</th><th>Date</th><th>Result</th><th>Actions</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Settings Tab -->
+    <div class="tab-content" id="tab-settings">
+      <h2>Site Settings</h2>
+      
+      <div class="card" style="padding: 20px; margin-top: 20px; margin-bottom: 30px;">
+        <h3>Site Theme</h3>
+        <p style="margin-bottom: 15px; opacity: 0.8; font-size: 0.9rem;">Changes save immediately and affect the live site.</p>
+        
+        <div style="margin-bottom: 20px;">
+          <button class="theme-preset-btn" onclick="applyPreset('dark')">Dark Scientific (Default)</button>
+          <button class="theme-preset-btn" onclick="applyPreset('navy')">Deep Navy</button>
+          <button class="theme-preset-btn" onclick="applyPreset('forest')">Forest Green</button>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-group"><label>Background</label><input type="color" id="theme-bg" onchange="saveTheme('theme_bg', this.value)"></div>
+          <div class="form-group"><label>Card Background</label><input type="color" id="theme-card" onchange="saveTheme('theme_card', this.value)"></div>
+          <div class="form-group"><label>Accent Color</label><input type="color" id="theme-accent" onchange="saveTheme('theme_accent', this.value)"></div>
+          <div class="form-group"><label>Brand/Logo Color</label><input type="color" id="theme-brand" onchange="saveTheme('theme_brand', this.value)"></div>
+          <div class="form-group"><label>Heading Color</label><input type="color" id="theme-heading" onchange="saveTheme('theme_heading', this.value)"></div>
+          <div class="form-group"><label>Text Color</label><input type="color" id="theme-text" onchange="saveTheme('theme_text', this.value)"></div>
+        </div>
+      </div>
+
+      <div class="card" style="padding: 20px; margin-bottom: 30px;">
+        <h3>General Info</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>WhatsApp Number (with country code, no + or spaces)</label>
+            <input type="text" id="set-wa">
+            <button class="btn-primary btn-small" style="margin-top:10px;" onclick="saveSetting('whatsapp_number', document.getElementById('set-wa').value)">Save Number</button>
+          </div>
+          <div class="form-group">
+            <label>Logo Upload</label>
+            <input type="file" id="set-logo" accept="image/*">
+            <button class="btn-primary btn-small" style="margin-top:10px;" onclick="uploadLogo()">Upload Logo</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding: 20px;">
+        <h3>Admin Security</h3>
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Current Password</label>
+            <input type="password" id="pwd-current">
+          </div>
+          <div class="form-group">
+            <label>New Password</label>
+            <input type="password" id="pwd-new">
+            <button class="btn-primary btn-small" style="margin-top:10px;" onclick="changePassword()">Change Password</button>
+            <p id="pwd-msg" style="margin-top:5px; font-size:0.9rem;"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- We load script type="module" for hashing capabilities if needed, or just standard JS -->
+  <script src="../js/supabase.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

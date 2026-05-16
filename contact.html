@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | BRSI – VIT Chapter</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main class="container" style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">
+    <section class="section reveal" style="text-align: center; max-width: 600px; width: 100%;">
+      <h1 class="section-title" style="margin-bottom: 20px;">Get in Touch</h1>
+      
+      <div class="card" style="padding: 50px;">
+        <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">
+          Have questions, suggestions, or want to collaborate? Reach out to us through our social channels or directly via WhatsApp.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+          <a href="https://linkedin.com/company/brsivit" target="_blank" class="btn-primary" style="width: 250px; background: #0077b5; border-radius: var(--border-radius);">
+            LinkedIn
+          </a>
+          
+          <a href="https://instagram.com/brsivit" target="_blank" class="btn-primary" style="width: 250px; background: #E1306C; border-radius: var(--border-radius);">
+            Instagram
+          </a>
+          
+          <a href="#" id="wa-link" target="_blank" class="btn-primary" style="width: 250px; background: #25D366; border-radius: var(--border-radius); display: none;">
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const { data, error } = await window.supabaseClient
+          .from('settings')
+          .select('value')
+          .eq('key', 'whatsapp_number')
+          .single();
+          
+        if (!error && data && data.value) {
+          const waLink = document.getElementById('wa-link');
+          // Format number for WA link by removing + or spaces
+          const num = data.value.replace(/\D/g,''); 
+          waLink.href = `https://wa.me/${num}`;
+          waLink.style.display = 'inline-block';
+        }
+      } catch (err) {
+        console.error('Error fetching WhatsApp number:', err);
+      }
+    });
+  </script>
+</body>
+</html>
