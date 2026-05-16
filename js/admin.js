@@ -292,6 +292,8 @@ async function loadSettings() {
   if(map.theme_text) document.getElementById('theme-text').value = map.theme_text;
   
   if(map.whatsapp_number) document.getElementById('set-wa').value = map.whatsapp_number;
+  if(map.link_linkedin) document.getElementById('set-linkedin').value = map.link_linkedin;
+  if(map.link_instagram) document.getElementById('set-instagram').value = map.link_instagram;
   
   if(map.desc_about) document.getElementById('set-desc-about').value = map.desc_about;
   if(map.desc_teams) document.getElementById('set-desc-teams').value = map.desc_teams;

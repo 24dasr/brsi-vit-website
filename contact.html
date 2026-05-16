@@ -21,11 +21,11 @@
         </p>
 
         <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
-          <a href="https://linkedin.com/company/brsivit" target="_blank" class="btn-primary" style="width: 250px; background: #0077b5; border-radius: var(--border-radius);">
+          <a href="https://linkedin.com/company/brsivit" id="li-link" target="_blank" class="btn-primary" style="width: 250px; background: #0077b5; border-radius: var(--border-radius);">
             LinkedIn
           </a>
           
-          <a href="https://instagram.com/brsivit" target="_blank" class="btn-primary" style="width: 250px; background: #E1306C; border-radius: var(--border-radius);">
+          <a href="https://instagram.com/brsivit" id="ig-link" target="_blank" class="btn-primary" style="width: 250px; background: #E1306C; border-radius: var(--border-radius);">
             Instagram
           </a>
           
@@ -47,19 +47,32 @@
       try {
         const { data, error } = await window.supabaseClient
           .from('settings')
-          .select('value')
-          .eq('key', 'whatsapp_number')
-          .single();
+          .select('key, value');
           
-        if (!error && data && data.value) {
-          const waLink = document.getElementById('wa-link');
-          // Format number for WA link by removing + or spaces
-          const num = data.value.replace(/\D/g,''); 
-          waLink.href = `https://wa.me/${num}`;
-          waLink.style.display = 'inline-block';
+        if (!error && data) {
+          const settings = {};
+          data.forEach(d => settings[d.key] = d.value);
+
+          // Apply LinkedIn
+          if (settings.link_linkedin) {
+            document.getElementById('li-link').href = settings.link_linkedin;
+          }
+          
+          // Apply Instagram
+          if (settings.link_instagram) {
+            document.getElementById('ig-link').href = settings.link_instagram;
+          }
+
+          // Apply WhatsApp
+          if (settings.whatsapp_number) {
+            const waLink = document.getElementById('wa-link');
+            const num = settings.whatsapp_number.replace(/\D/g,''); 
+            waLink.href = `https://wa.me/${num}`;
+            waLink.style.display = 'inline-block';
+          }
         }
       } catch (err) {
-        console.error('Error fetching WhatsApp number:', err);
+        console.error('Error fetching social links:', err);
       }
     });
   </script>
