@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
-
 :root {
   /* Default Theme Variables (Dark Scientific) */
   --bg-color: #f2e6d0; /* Match mockup beige */
@@ -255,6 +253,7 @@ img {
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.8s ease-out;
+  will-change: transform, opacity;
 }
 
 .reveal.active {
