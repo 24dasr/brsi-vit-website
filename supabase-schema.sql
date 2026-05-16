@@ -69,6 +69,7 @@ INSERT INTO public.settings (key, value) VALUES
 INSERT INTO storage.buckets (id, name, public) VALUES 
 ('events-images', 'events-images', true),
 ('biobuzz-covers', 'biobuzz-covers', true),
+('biobuzz-articles', 'biobuzz-articles', true),
 ('board-photos', 'board-photos', true),
 ('team-images', 'team-images', true),
 ('site-assets', 'site-assets', true)

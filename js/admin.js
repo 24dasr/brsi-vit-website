@@ -141,8 +141,11 @@ function setupForm(formId, table, bucket, reloadFn) {
           description: document.getElementById('bb-desc').value,
           read_link: document.getElementById('bb-link').value
         };
-        const file = document.getElementById('bb-img').files[0];
-        if (file) payload.cover_url = await uploadFile(file, bucket);
+        const imgFile = document.getElementById('bb-img').files[0];
+        if (imgFile) payload.cover_url = await uploadFile(imgFile, bucket);
+        
+        const pdfFile = document.getElementById('bb-pdf').files[0];
+        if (pdfFile) payload.read_link = await uploadFile(pdfFile, 'biobuzz-articles');
       }
       else if (table === 'board_members') {
         payload = {

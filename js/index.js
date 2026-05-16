@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <p style="color: var(--accent-color); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; flex-grow: 1; opacity: 0.9;">
           ${issue.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent placerat urna nibh, eu elementum purus pulvinar in. Mauris at libero ipsum. Pellentesque venenatis, erat quis pretium malesuada, arcu elit consectetur metus.'}
         </p>
-        <a href="${issue.read_link || '#'}" target="_blank" class="btn-primary" style="text-align: center; background-color: #8cbdb1; color: #1a1a1a; width: 100%; border-radius: 12px; font-size: 1.2rem; padding: 15px;">Click Here</a>
+        <a href="${window.getPublicUrl('biobuzz-articles', issue.read_link)}" target="_blank" class="btn-primary" style="text-align: center; background-color: #8cbdb1; color: #1a1a1a; width: 100%; border-radius: 12px; font-size: 1.2rem; padding: 15px;">Click Here</a>
       </div>
     `).join('');
     

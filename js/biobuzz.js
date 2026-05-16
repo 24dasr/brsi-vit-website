@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <h2 style="color: var(--brand-color); font-size: 2rem; margin-bottom: 15px;">${featured.edition_name}</h2>
           <p style="color: var(--accent-color); margin-bottom: 20px;">Released: ${new Date(featured.release_date).toLocaleDateString()}</p>
           <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">${featured.description || 'No description provided.'}</p>
-          <a href="${featured.read_link || '#'}" target="_blank" class="btn-primary" style="align-self: flex-start;">Read / Download</a>
+          <a href="${window.getPublicUrl('biobuzz-articles', featured.read_link)}" target="_blank" class="btn-primary" style="align-self: flex-start;">Read / Download</a>
         </div>
       </div>
     `;
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="card-content">
             <h3 class="card-title" style="font-size: 1.2rem;">${issue.edition_name}</h3>
             <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">${new Date(issue.release_date).toLocaleDateString()}</p>
-            <a href="${issue.read_link || '#'}" target="_blank" class="card-btn" style="font-size: 0.85rem; padding: 5px 15px;">Read</a>
+            <a href="${window.getPublicUrl('biobuzz-articles', issue.read_link)}" target="_blank" class="card-btn" style="font-size: 0.85rem; padding: 5px 15px;">Read</a>
           </div>
         </div>
       `).join('');
