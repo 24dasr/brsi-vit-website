@@ -52,8 +52,8 @@ CREATE TABLE public.settings (
 -- Default passwords: "brsi2025admin1" and "brsi2025admin2"
 -- SHA-256 hashes generated for the above passwords:
 INSERT INTO public.settings (key, value) VALUES
-('admin1_hash', '8816c142c26214532b260de8fbcaf3cc3fde9b8e97a3d3c85854897f2626e3c0'),
-('admin2_hash', '920ea50b0cdb518bb1b808942a6913e2bbdc3e1e8cc31ec1968817da3de114ff'),
+('admin1_hash', '98ed6ad7427a148287d22195477e70f7eb57a3ada85c5390dfd59e5075cabe86'),
+('admin2_hash', '9612e691104e9bec47a56cf952230c30f8134ad5d8416ac35a64bb4fd23e9263'),
 ('whatsapp_number', '+910000000000'),
 ('logo_url', ''),
 ('theme_bg', '#f2e8c8'),
