@@ -11,7 +11,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (error) throw error;
     
     if (!data || data.length === 0) {
-      container.innerHTML = '<div class="empty-state">No Biobuzz issues published yet.</div>';
+      container.innerHTML = `
+        <div class="card reveal" style="grid-column: 1 / -1; padding: 60px 40px; border-radius: var(--border-radius); text-align: center; display: flex; flex-direction: column; align-items: center;">
+          <h3 style="color: var(--accent-color); font-size: 2rem; margin-bottom: 15px;">Latest Biobuzz</h3>
+          <p style="color: var(--accent-color); font-size: 1.1rem; opacity: 0.8;">No Biobuzz issues published yet. Check back soon!</p>
+        </div>
+      `;
+      window.dispatchEvent(new Event('scroll'));
       return;
     }
     
