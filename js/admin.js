@@ -289,6 +289,10 @@ async function loadSettings() {
   if(map.theme_text) document.getElementById('theme-text').value = map.theme_text;
   
   if(map.whatsapp_number) document.getElementById('set-wa').value = map.whatsapp_number;
+  
+  if(map.desc_about) document.getElementById('set-desc-about').value = map.desc_about;
+  if(map.desc_teams) document.getElementById('set-desc-teams').value = map.desc_teams;
+  if(map.desc_podcast) document.getElementById('set-desc-podcast').value = map.desc_podcast;
 }
 
 window.saveSetting = async function(key, value) {

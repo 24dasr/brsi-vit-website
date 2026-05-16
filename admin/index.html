@@ -193,6 +193,23 @@
             <button class="btn-primary btn-small" style="margin-top:10px;" onclick="uploadLogo()">Upload Logo</button>
           </div>
         </div>
+      <div class="card" style="padding: 20px; margin-bottom: 30px;">
+        <h3>Site Content</h3>
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label>Home Page "About Us" Description</label>
+          <textarea id="set-desc-about" rows="4"></textarea>
+          <button class="btn-primary btn-small" style="margin-top:10px;" onclick="saveSetting('desc_about', document.getElementById('set-desc-about').value)">Save About Us</button>
+        </div>
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label>Teams Page Description</label>
+          <textarea id="set-desc-teams" rows="4"></textarea>
+          <button class="btn-primary btn-small" style="margin-top:10px;" onclick="saveSetting('desc_teams', document.getElementById('set-desc-teams').value)">Save Teams</button>
+        </div>
+        <div class="form-group">
+          <label>Podcast Page Message</label>
+          <textarea id="set-desc-podcast" rows="4"></textarea>
+          <button class="btn-primary btn-small" style="margin-top:10px;" onclick="saveSetting('desc_podcast', document.getElementById('set-desc-podcast').value)">Save Podcast</button>
+        </div>
       </div>
 
       <div class="card" style="padding: 20px;">

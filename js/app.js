@@ -10,14 +10,13 @@ async function loadTheme() {
   try {
     const { data, error } = await window.supabaseClient
       .from('settings')
-      .select('key, value')
-      .like('key', 'theme_%');
+      .select('key, value');
       
     if (error) throw error;
     
     if (data && data.length > 0) {
       data.forEach(setting => {
-        // e.g. theme_bg -> --bg-color
+        // Handle CSS Theme Variables
         let cssVar = '';
         if (setting.key === 'theme_bg') cssVar = '--bg-color';
         else if (setting.key === 'theme_card') cssVar = '--card-bg';
@@ -29,22 +28,28 @@ async function loadTheme() {
         if (cssVar && setting.value) {
           document.documentElement.style.setProperty(cssVar, setting.value);
         }
-      });
-    }
 
-    // Load Logo if available
-    const { data: logoData } = await window.supabaseClient
-      .from('settings')
-      .select('value')
-      .eq('key', 'logo_url')
-      .single();
-      
-    if (logoData && logoData.value) {
-      const logos = document.querySelectorAll('.nav-logo');
-      logos.forEach(img => img.src = window.getPublicUrl('site-assets', logoData.value));
+        // Handle Site Content Descriptions
+        if (setting.key === 'desc_about' && document.getElementById('desc-about-text')) {
+          document.getElementById('desc-about-text').textContent = setting.value;
+        }
+        if (setting.key === 'desc_teams' && document.getElementById('desc-teams-text')) {
+          document.getElementById('desc-teams-text').textContent = setting.value;
+        }
+        if (setting.key === 'desc_podcast' && document.getElementById('desc-podcast-text')) {
+          document.getElementById('desc-podcast-text').textContent = setting.value;
+        }
+      });
+
+      // Load Logo if available
+      const logoData = data.find(d => d.key === 'logo_url');
+      if (logoData && logoData.value) {
+        const logos = document.querySelectorAll('.nav-logo');
+        logos.forEach(img => img.src = window.getPublicUrl('site-assets', logoData.value));
+      }
     }
   } catch (err) {
-    console.error('Error loading theme:', err);
+    console.error('Error loading settings:', err);
   }
 }
 
