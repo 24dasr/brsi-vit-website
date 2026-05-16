@@ -381,3 +381,18 @@ window.changePassword = async function() {
     msg.textContent = err.message;
   }
 }
+
+// Auto-update board order based on position selection
+window.updateBoardOrder = function() {
+  const positions = [
+    "Chairman", "Vice Chair", "Secretary", "Co Secretary", 
+    "Research Head", "Editorial Head", "Events Head", 
+    "Design Head", "Finance Head", "Internal Creatives", 
+    "Teams Lead", "HR Head"
+  ];
+  const pos = document.getElementById('bm-pos').value;
+  const index = positions.indexOf(pos);
+  if (index !== -1) {
+    document.getElementById('bm-order').value = index + 1;
+  }
+}
