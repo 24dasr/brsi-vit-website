@@ -394,7 +394,7 @@ window.changePassword = async function() {
 // Auto-update board order based on position selection
 window.updateBoardOrder = function() {
   const positions = [
-    "Chairman", "Vice Chair", "Secretary", "Co Secretary", 
+    "Chairperson", "Vice Chair", "Secretary", "Co Secretary", 
     "Research Head", "Editorial Head", "Events Head", 
     "Design Head", "Finance Head", "Internal Creatives", 
     "Teams Lead", "HR Head"
