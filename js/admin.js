@@ -397,7 +397,7 @@ window.updateBoardOrder = function() {
     "Chairperson", "Vice Chair", "Secretary", "Co Secretary", 
     "Research Head", "Editorial Head", "Events Head", 
     "Design Head", "Finance Head", "Internal Creatives", 
-    "Teams Lead", "Internal HR"
+    "Teams Lead", "Internal HR", "PR Head"
   ];
   const pos = document.getElementById('bm-pos').value;
   const index = positions.indexOf(pos);
