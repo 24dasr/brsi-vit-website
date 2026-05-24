@@ -17,7 +17,7 @@
       
       <div class="card" style="padding: 50px;">
         <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">
-          Have questions, suggestions, or want to collaborate? Reach out to us through our social channels or directly via WhatsApp.
+          Have questions, suggestions, or want to collaborate? Reach out to us through our social channels or directly via Email.
         </p>
 
         <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
@@ -29,8 +29,8 @@
             Instagram
           </a>
           
-          <a href="#" id="wa-link" target="_blank" class="btn-primary" style="width: 250px; background: #25D366; border-radius: var(--border-radius); display: none;">
-            WhatsApp
+          <a href="#" id="email-link" target="_blank" class="btn-primary" style="width: 250px; background: #ea4335; border-radius: var(--border-radius); display: none;">
+            Email
           </a>
         </div>
       </div>
@@ -63,12 +63,11 @@
             document.getElementById('ig-link').href = settings.link_instagram;
           }
 
-          // Apply WhatsApp
-          if (settings.whatsapp_number) {
-            const waLink = document.getElementById('wa-link');
-            const num = settings.whatsapp_number.replace(/\D/g,''); 
-            waLink.href = `https://wa.me/${num}`;
-            waLink.style.display = 'inline-block';
+          // Apply Email
+          if (settings.contact_email) {
+            const emailLink = document.getElementById('email-link');
+            emailLink.href = `mailto:${settings.contact_email}`;
+            emailLink.style.display = 'inline-block';
           }
         }
       } catch (err) {
