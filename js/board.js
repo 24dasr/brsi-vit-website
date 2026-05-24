@@ -71,8 +71,10 @@ function renderBoard(members, container) {
   container.innerHTML = members.map((m, index) => `
     <div class="card member-card reveal" style="transition-delay: ${index * 0.1}s">
       <img src="${window.getPublicUrl('board-photos', m.photo_url)}" alt="${m.member_name}" class="member-photo">
-      <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 5px;">${m.member_name}</h3>
-      <p style="color: var(--accent-color); font-weight: 500;">${m.position}</p>
+      <div class="member-info">
+        <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 5px;">${m.member_name}</h3>
+        <p style="color: var(--accent-color); font-weight: 500;">${m.position}</p>
+      </div>
     </div>
   `).join('');
   

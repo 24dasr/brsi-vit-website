@@ -9,23 +9,23 @@
   <style>
     .member-card {
       text-align: center;
-      padding: 30px 20px;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
+      overflow: hidden;
     }
     .member-photo {
       width: 100%;
-      aspect-ratio: 4 / 3;
-      border-radius: 15px;
-      object-fit: contain;
-      margin-bottom: 20px;
-      border: 1px solid rgba(140, 189, 177, 0.3);
+      height: auto;
+      display: block;
       transition: var(--transition);
     }
     .member-card:hover .member-photo {
-      transform: scale(1.1);
-      border-color: var(--brand-color);
+      transform: scale(1.05);
+    }
+    .member-info {
+      padding: 20px 15px;
     }
     .year-select-container {
       margin: 40px 0;
