@@ -27,6 +27,17 @@ const footerHTML = `
 `;
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Inject Ambient Background Globs
+  const glow1 = document.createElement('div');
+  glow1.className = 'bg-glow-1';
+  const glow2 = document.createElement('div');
+  glow2.className = 'bg-glow-2';
+  const glow3 = document.createElement('div');
+  glow3.className = 'bg-glow-3';
+  document.body.appendChild(glow1);
+  document.body.appendChild(glow2);
+  document.body.appendChild(glow3);
+
   // Inject Navbar
   const navPlaceholder = document.getElementById('navbar-container');
   if (navPlaceholder) {
