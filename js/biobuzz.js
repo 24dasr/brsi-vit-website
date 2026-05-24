@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <h2 style="color: var(--brand-color); font-size: 2rem; margin-bottom: 15px;">${featured.edition_name}</h2>
           <p style="color: var(--accent-color); margin-bottom: 20px;">Released: ${new Date(featured.release_date).toLocaleDateString()}</p>
           <p style="font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9;">${featured.description || 'No description provided.'}</p>
-          <a href="${window.getPublicUrl('biobuzz-articles', featured.read_link)}" target="_blank" class="btn-primary" style="align-self: flex-start;">Read / Download</a>
+          <a href="#" onclick="openBiobuzzModal('${window.getPublicUrl('biobuzz-articles', featured.read_link)}', event)" class="btn-primary" style="align-self: flex-start;">Read / Download</a>
         </div>
       </div>
     `;
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="card-content">
             <h3 class="card-title" style="font-size: 1.2rem;">${issue.edition_name}</h3>
             <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">${new Date(issue.release_date).toLocaleDateString()}</p>
-            <a href="${window.getPublicUrl('biobuzz-articles', issue.read_link)}" target="_blank" class="card-btn" style="font-size: 0.85rem; padding: 5px 15px;">Read</a>
+            <a href="#" onclick="openBiobuzzModal('${window.getPublicUrl('biobuzz-articles', issue.read_link)}', event)" class="card-btn" style="font-size: 0.85rem; padding: 5px 15px;">Read</a>
           </div>
         </div>
       `).join('');
@@ -56,5 +56,46 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error fetching biobuzz:', err);
     featuredContainer.innerHTML = '<div class="card-content">Error loading Biobuzz.</div>';
     archiveContainer.innerHTML = '';
+  }
+});
+
+// Modal Logic
+window.openBiobuzzModal = function(url, event) {
+  if (event) event.preventDefault();
+  const modal = document.getElementById('biobuzz-modal');
+  const iframe = document.getElementById('biobuzz-iframe');
+  
+  if (modal && iframe) {
+    iframe.src = url;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Stop background scrolling
+  }
+};
+
+window.closeBiobuzzModal = function() {
+  const modal = document.getElementById('biobuzz-modal');
+  const iframe = document.getElementById('biobuzz-iframe');
+  
+  if (modal && iframe) {
+    modal.classList.remove('active');
+    iframe.src = ''; // Unload iframe to stop background CPU load
+    document.body.style.overflow = '';
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const closeBtn = document.getElementById('close-modal-btn');
+  const modal = document.getElementById('biobuzz-modal');
+  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', window.closeBiobuzzModal);
+  }
+  
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        window.closeBiobuzzModal();
+      }
+    });
   }
 });
