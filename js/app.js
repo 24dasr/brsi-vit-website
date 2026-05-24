@@ -47,6 +47,13 @@ async function loadTheme() {
         const logos = document.querySelectorAll('.nav-logo');
         logos.forEach(img => img.src = window.getPublicUrl('site-assets', logoData.value));
       }
+
+      // Load Homepage Banner if available
+      const bannerData = data.find(d => d.key === 'homepage_banner_url');
+      const homepageBanner = document.getElementById('homepage-banner');
+      if (bannerData && bannerData.value && homepageBanner) {
+        homepageBanner.src = window.getPublicUrl('site-assets', bannerData.value);
+      }
     }
   } catch (err) {
     console.error('Error loading settings:', err);

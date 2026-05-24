@@ -354,6 +354,15 @@ window.uploadLogo = async function() {
   }
 }
 
+window.uploadBanner = async function() {
+  const file = document.getElementById('set-banner').files[0];
+  if(!file) return alert('Select an image');
+  const path = await uploadFile(file, 'site-assets');
+  if(path) {
+    await saveSetting('homepage_banner_url', path);
+  }
+}
+
 window.changePassword = async function() {
   const current = document.getElementById('pwd-current').value;
   const newpwd = document.getElementById('pwd-new').value;
