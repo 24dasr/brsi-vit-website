@@ -21,15 +21,15 @@
         </p>
 
         <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
-          <a href="https://linkedin.com/company/brsivit" id="li-link" target="_blank" class="btn-primary" style="width: 250px; background: #0077b5; border-radius: var(--border-radius);">
+          <a href="https://linkedin.com/company/brsivit" id="li-link" target="_blank" class="btn-primary" style="min-width: 250px; width: auto; padding: 14px 24px; background: #0077b5; border-radius: var(--border-radius);">
             LinkedIn
           </a>
           
-          <a href="https://instagram.com/brsivit" id="ig-link" target="_blank" class="btn-primary" style="width: 250px; background: #E1306C; border-radius: var(--border-radius);">
+          <a href="https://instagram.com/brsivit" id="ig-link" target="_blank" class="btn-primary" style="min-width: 250px; width: auto; padding: 14px 24px; background: #E1306C; border-radius: var(--border-radius);">
             Instagram
           </a>
           
-          <a href="#" id="email-link" target="_blank" class="btn-primary" style="width: 250px; background: #ea4335; border-radius: var(--border-radius); display: none;">
+          <a href="#" id="email-link" target="_blank" class="btn-primary" style="min-width: 250px; width: auto; padding: 14px 24px; background: #ea4335; border-radius: var(--border-radius); display: none;">
             Email
           </a>
         </div>
@@ -67,6 +67,7 @@
           if (settings.contact_email) {
             const emailLink = document.getElementById('email-link');
             emailLink.href = `mailto:${settings.contact_email}`;
+            emailLink.textContent = settings.contact_email;
             emailLink.style.display = 'inline-block';
           }
         }
