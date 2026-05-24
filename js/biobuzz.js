@@ -43,8 +43,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             <img src="${window.getPublicUrl('biobuzz-covers', issue.cover_url)}" alt="${issue.edition_name}" class="card-img" style="object-position: top;">
           </div>
           <div class="card-content">
-            <h3 class="card-title" style="font-size: 1.2rem;">${issue.edition_name}</h3>
-            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">${new Date(issue.release_date).toLocaleDateString()}</p>
+            <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 5px;">${issue.edition_name}</h3>
+            <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 15px;">Released: ${new Date(issue.release_date).toLocaleDateString()}</p>
+            <p class="card-desc" style="font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">${issue.description || 'No description provided.'}</p>
             <a href="#" onclick="openBiobuzzModal('${window.getPublicUrl('biobuzz-articles', issue.read_link)}', event)" class="card-btn" style="font-size: 0.85rem; padding: 5px 15px;">Read</a>
           </div>
         </div>
