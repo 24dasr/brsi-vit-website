@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="card-content">
             <h3 class="card-title" style="font-size: 1.2rem; margin-bottom: 5px;">${issue.edition_name}</h3>
             <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 15px;">Released: ${new Date(issue.release_date).toLocaleDateString()}</p>
-            <p class="card-desc" style="font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5;">${issue.description || 'No description provided.'}</p>
+            <p style="font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; opacity: 0.85;">${issue.description || 'No description provided.'}</p>
             <a href="${window.getPublicUrl('biobuzz-articles', issue.read_link)}" target="_blank" class="card-btn" style="font-size: 0.85rem; padding: 5px 15px;">Read</a>
           </div>
         </div>
