@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupForm('form-biobuzz', 'biobuzz', 'biobuzz-covers', loadBiobuzz);
   setupForm('form-board', 'board_members', 'board-photos', loadBoard);
   setupForm('form-teams', 'team_events', 'team-images', loadTeams);
+  setupForm('form-blogs', 'blogs', 'blog-covers', loadBlogs);
 });
 
 // Crypto Helper
@@ -85,6 +86,7 @@ function showDashboard() {
   loadBiobuzz();
   loadBoard();
   loadTeams();
+  loadBlogs();
   loadSettings();
 }
 
@@ -168,6 +170,17 @@ function setupForm(formId, table, bucket, reloadFn) {
         const file = document.getElementById('te-img').files[0];
         if (file) payload.image_url = await uploadFile(file, bucket);
       }
+      else if (table === 'blogs') {
+        payload = {
+          title: document.getElementById('bl-title').value,
+          author: document.getElementById('bl-author').value,
+          published_date: document.getElementById('bl-date').value,
+          excerpt: document.getElementById('bl-excerpt').value,
+          content: document.getElementById('bl-content').value
+        };
+        const file = document.getElementById('bl-img').files[0];
+        if (file) payload.cover_url = await uploadFile(file, bucket);
+      }
 
       if (id) {
         // Update
@@ -206,6 +219,7 @@ window.deleteRecord = async function(table, id, reloadFnName) {
     if(reloadFnName === 'loadBiobuzz') loadBiobuzz();
     if(reloadFnName === 'loadBoard') loadBoard();
     if(reloadFnName === 'loadTeams') loadTeams();
+    if(reloadFnName === 'loadBlogs') loadBlogs();
   } catch (err) {
     alert('Error deleting: ' + err.message);
   }
@@ -268,6 +282,21 @@ async function loadTeams() {
       <td>${te.result || '-'}</td>
       <td>
         <button class="btn-small btn-danger" onclick="deleteRecord('team_events', '${te.id}', 'loadTeams')">Del</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function loadBlogs() {
+  const { data } = await window.supabaseClient.from('blogs').select('*').order('published_date', { ascending: false });
+  const tbody = document.querySelector('#table-blogs tbody');
+  tbody.innerHTML = (data || []).map(bl => `
+    <tr>
+      <td>${bl.title}</td>
+      <td>${bl.published_date}</td>
+      <td>${bl.author || '-'}</td>
+      <td>
+        <button class="btn-small btn-danger" onclick="deleteRecord('blogs', '${bl.id}', 'loadBlogs')">Del</button>
       </td>
     </tr>
   `).join('');

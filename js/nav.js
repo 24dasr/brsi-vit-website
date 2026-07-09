@@ -9,6 +9,7 @@ const navHTML = `
     <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
     <li><a href="events.html" class="nav-link" id="nav-events">Events</a></li>
     <li><a href="biobuzz.html" class="nav-link" id="nav-biobuzz">Biobuzz</a></li>
+    <li><a href="blogs.html" class="nav-link" id="nav-blogs">Blog</a></li>
     <li><a href="podcast.html" class="nav-link" id="nav-podcast">Podcast</a></li>
     <li><a href="teams.html" class="nav-link" id="nav-teams">BRSI-Teams</a></li>
     <li><a href="board.html" class="nav-link" id="nav-board">Board</a></li>

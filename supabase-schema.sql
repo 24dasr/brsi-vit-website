@@ -43,6 +43,17 @@ CREATE TABLE public.team_events (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+CREATE TABLE public.blogs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    author TEXT,
+    published_date DATE NOT NULL,
+    cover_url TEXT,
+    excerpt TEXT,
+    content TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 CREATE TABLE public.settings (
     key TEXT PRIMARY KEY,
     value TEXT
@@ -72,6 +83,7 @@ INSERT INTO storage.buckets (id, name, public) VALUES
 ('biobuzz-articles', 'biobuzz-articles', true),
 ('board-photos', 'board-photos', true),
 ('team-images', 'team-images', true),
+('blog-covers', 'blog-covers', true),
 ('site-assets', 'site-assets', true)
 ON CONFLICT (id) DO NOTHING;
 
@@ -88,6 +100,7 @@ ALTER TABLE public.events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.biobuzz ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.board_members ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.team_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.blogs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.settings ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Enable read access for all users" ON public.events FOR SELECT USING (true);
@@ -101,6 +114,9 @@ CREATE POLICY "Enable all access for all users" ON public.board_members FOR ALL 
 
 CREATE POLICY "Enable read access for all users" ON public.team_events FOR SELECT USING (true);
 CREATE POLICY "Enable all access for all users" ON public.team_events FOR ALL USING (true);
+
+CREATE POLICY "Enable read access for all users" ON public.blogs FOR SELECT USING (true);
+CREATE POLICY "Enable all access for all users" ON public.blogs FOR ALL USING (true);
 
 CREATE POLICY "Enable read access for all users" ON public.settings FOR SELECT USING (true);
 CREATE POLICY "Enable all access for all users" ON public.settings FOR ALL USING (true);
